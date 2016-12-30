@@ -1,0 +1,79 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20161221133228
+Username: Lappy7\Eric
+RunAs User: Lappy7\Eric
+Machine: LAPPY7 (Microsoft Windows NT 10.0.14393.0)
+Host Application: powershell -Command & { Start-Transcript -path ./Build/lastbuild.log; Import-Module .\Tools\psake\tools\psake.psm1; Invoke-psake .\build-psake.ps1 ; Stop-Transcript; }
+Process ID: 7712
+PSVersion: 5.1.14393.576
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.14393.576
+BuildVersion: 10.0.14393.576
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is ./Build/lastbuild.log
+psake version 4.6.0
+Copyright (c) 2010-2014 James Kovacs & Contributors
+
+	Write-Output "NotImplementedException"
+
+Warning: Using global variable $framework to set .NET framework version used is deprecated. Instead use Framework function or configuration file psake-config.ps1.
+Executing Clean
+-Deleted Working Directory: C:\Projects\gmaps-api-net\Build\Working
+Executing UpdateAssemblyInfoVersions
+-Using build version: 1.2.
+-AssemblyVersion:
+-AssemblyFileVersion:
+C:\Projects\gmaps-api-net\src\Google.Maps\Properties\AssemblyInfo.cs
+C:\Projects\gmaps-api-net\src\Google.Maps.Test\Properties\AssemblyInfo.cs
+C:\Projects\gmaps-api-net\src\Samples\SearchAddressMap\Properties\AssemblyInfo.cs
+Executing Build
+-Building	 GoogleMapsForNET.sln
+-Signed		 False
+Microsoft (R) Build Engine version 4.6.1586.0
+[Microsoft .NET Framework, version 4.0.30319.42000]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restoring NuGet packages...
+  To prevent NuGet from downloading packages during build, open the Visual Studio Options dialog, click on the Package Manager node and uncheck 'Allo
+  w NuGet to download missing packages'.
+  All packages listed in packages.config are already installed.
+Places\Details\AspectType.cs(3,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\AspectType.cs(15,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PlaceDetailsRequest.cs(68,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PlaceDetailsRequest.cs(73,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PriceLevel.cs(3,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PriceLevel.cs(13,25): warning CS1692: Invalid number [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Shared\AddressComponent.cs(24,15): warning CS0659: 'Google.Maps.Shared.AddressComponent' overrides Object.Equals(object o) but does not override Obje
+ct.GetHashCode() [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+LatLng.cs(26,15): warning CS0659: 'Google.Maps.LatLng' overrides Object.Equals(object o) but does not override Object.GetHashCode() [C:\Projects\gmap
+s-api-net\src\Google.Maps\Google.Maps.csproj]
+ViaLatLng.cs(26,15): warning CS0659: 'Google.Maps.ViaLatLng' overrides Object.Equals(object o) but does not override Object.GetHashCode() [C:\Project
+s\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Properties\AssemblyInfo.cs(25,12): error CS0647: Error emitting 'System.Reflection.AssemblyVersionAttribute' attribute -- 'The version specified '1.2
+..24374' is invalid' [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+CSC : warning CS1607: Assembly generation -- The version '1.2..24374' specified for the 'file version' is not in the normal 'major.minor.build.revisi
+on' format [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PlaceDetailsRequest.cs(69,34): warning CS0618: 'Google.Maps.Places.Details.PlaceDetailsRequest.Reference' is obsolete: 'Use PlaceID' [
+C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+Places\Details\PlaceDetailsRequest.cs(71,29): warning CS0618: 'Google.Maps.Places.Details.PlaceDetailsRequest.Reference' is obsolete: 'Use PlaceID' [
+C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.csproj]
+StaticMaps\StaticMapRequest.cs(331,4): warning CS0164: This label has not been referenced [C:\Projects\gmaps-api-net\src\Google.Maps\Google.Maps.cspr
+oj]
+PS>TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+>> TerminatingError(): "Exec: Error building GoogleMapsForNET.sln"
+Error: 12/21/2016 1:32:30 PM: 
+At C:\Projects\gmaps-api-net\Tools\psake\tools\psake.psm1:156 char:17 +                 throw ("Exec: " + $errorMessage) +                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [<<==>>] Exception: Exec: Error building GoogleMapsForNET.sln
+**********************
+Windows PowerShell transcript end
+End time: 20161221133230
+**********************
