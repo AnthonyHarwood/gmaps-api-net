@@ -1,12 +1,12 @@
 properties { 
-  $zipFileName = "Json90r2.zip"
-  $majorVersion = "9.0"
-  $majorWithReleaseVersion = "9.0.2"
+  $zipFileName = "gmaps-api-net.1.0.0.zip"
+  $majorVersion = "1.0"
+  $majorWithReleaseVersion = "1.0.0"
   $nugetPrerelease = "beta1"
   $version = GetVersion $majorWithReleaseVersion
-  $packageId = "Newtonsoft.Json"
+  $packageId = "gmaps-api-net"
   $signAssemblies = $false
-  $signKeyPath = "C:\Development\Releases\newtonsoft.snk"
+  $signKeyPath = "directoryofsnk"
   $buildDocumentation = $false
   $buildNuGet = $true
   $treatWarningsAsErrors = $false
@@ -22,14 +22,14 @@ properties {
   $workingDir = "$baseDir\$workingName"
   $workingSourceDir = "$workingDir\Src"
   $builds = @(
-    @{Name = "Newtonsoft.Json.Dotnet"; TestsName = "Newtonsoft.Json.Tests.Dotnet"; BuildFunction = "NetCliBuild"; TestsFunction = "NetCliTests"; Constants="NETSTANDARD1_0"; FinalDir="netstandard1.0"; NuGetDir = "netstandard1.0"; Framework=$null},
-    @{Name = "Newtonsoft.Json.Dotnet"; TestsName = "Newtonsoft.Json.Tests.Dotnet"; BuildFunction = "NetCliBuild"; TestsFunction = "NetCliTests"; Constants="NETSTANDARD1_1"; FinalDir="netstandard1.1"; NuGetDir = "netstandard1.1"; Framework=$null},
-    @{Name = "Newtonsoft.Json"; TestsName = "Newtonsoft.Json.Tests"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants=""; FinalDir="Net45"; NuGetDir = "net45"; Framework="net-4.0"},
-    @{Name = "Newtonsoft.Json.Portable"; TestsName = "Newtonsoft.Json.Tests.Portable"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net45+wp80+win8+wpa81"; Framework="net-4.0"},
-    @{Name = "Newtonsoft.Json.Portable40"; TestsName = "Newtonsoft.Json.Tests.Portable40"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="PORTABLE40"; FinalDir="Portable40"; NuGetDir = "portable-net40+sl5+wp80+win8+wpa81"; Framework="net-4.0"},
-    @{Name = "Newtonsoft.Json.Net40"; TestsName = "Newtonsoft.Json.Tests.Net40"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET40"; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"},
-    @{Name = "Newtonsoft.Json.Net35"; TestsName = "Newtonsoft.Json.Tests.Net35"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET35"; FinalDir="Net35"; NuGetDir = "net35"; Framework="net-2.0"},
-    @{Name = "Newtonsoft.Json.Net20"; TestsName = "Newtonsoft.Json.Tests.Net20"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET20"; FinalDir="Net20"; NuGetDir = "net20"; Framework="net-2.0"}
+    @{Name = "GoogleMapsForNET.Dotnet"; TestsName = "GoogleMapsForNET.Tests.Dotnet"; BuildFunction = "NetCliBuild"; TestsFunction = "NetCliTests"; Constants="NETSTANDARD1_0"; FinalDir="netstandard1.0"; NuGetDir = "netstandard1.0"; Framework=$null},
+    @{Name = "GoogleMapsForNET.Dotnet"; TestsName = "GoogleMapsForNET.Tests.Dotnet"; BuildFunction = "NetCliBuild"; TestsFunction = "NetCliTests"; Constants="NETSTANDARD1_1"; FinalDir="netstandard1.1"; NuGetDir = "netstandard1.1"; Framework=$null},
+    @{Name = "GoogleMapsForNET"; TestsName = "GoogleMapsForNET.Tests"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants=""; FinalDir="Net45"; NuGetDir = "net45"; Framework="net-4.0"},
+    @{Name = "GoogleMapsForNET.Portable"; TestsName = "GoogleMapsForNET.Tests.Portable"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="PORTABLE"; FinalDir="Portable"; NuGetDir = "portable-net45+wp80+win8+wpa81"; Framework="net-4.0"},
+    @{Name = "GoogleMapsForNET.Portable40"; TestsName = "GoogleMapsForNET.Tests.Portable40"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="PORTABLE40"; FinalDir="Portable40"; NuGetDir = "portable-net40+sl5+wp80+win8+wpa81"; Framework="net-4.0"},
+    @{Name = "GoogleMapsForNET.Net40"; TestsName = "GoogleMapsForNET.Tests.Net40"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET40"; FinalDir="Net40"; NuGetDir = "net40"; Framework="net-4.0"},
+    @{Name = "GoogleMapsForNET.Net35"; TestsName = "GoogleMapsForNET.Tests.Net35"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET35"; FinalDir="Net35"; NuGetDir = "net35"; Framework="net-2.0"},
+    @{Name = "GoogleMapsForNET.Net20"; TestsName = "GoogleMapsForNET.Tests.Net20"; BuildFunction = "MSBuildBuild"; TestsFunction = "NUnitTests"; Constants="NET20"; FinalDir="Net20"; NuGetDir = "net20"; Framework="net-2.0"}
   )
 }
 
@@ -62,7 +62,7 @@ task Build -depends Clean {
   Write-Host
   Update-AssemblyInfoFiles $workingSourceDir ($majorVersion + '.0.0') $version
 
-  Update-Project $workingSourceDir\Newtonsoft.Json\project.json $signAssemblies
+  Update-Project $workingSourceDir\Google.Maps\project.json $signAssemblies
 
   foreach ($build in $builds)
   {
@@ -85,7 +85,7 @@ task Package -depends Build {
     $name = $build.TestsName
     $finalDir = $build.FinalDir
     
-    robocopy "$workingSourceDir\Newtonsoft.Json\bin\Release\$finalDir" $workingDir\Package\Bin\$finalDir *.dll *.pdb *.xml /NFL /NDL /NJS /NC /NS /NP /XO /XF *.CodeAnalysisLog.xml | Out-Default
+    robocopy "$workingSourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\Package\Bin\$finalDir *.dll *.pdb *.xml /NFL /NDL /NJS /NC /NS /NP /XO /XF *.CodeAnalysisLog.xml | Out-Default
   }
   
   if ($buildNuGet)
@@ -94,8 +94,8 @@ task Package -depends Build {
 
     New-Item -Path $workingDir\NuGet -ItemType Directory
 
-    $nuspecPath = "$workingDir\NuGet\Newtonsoft.Json.nuspec"
-    Copy-Item -Path "$buildDir\Newtonsoft.Json.nuspec" -Destination $nuspecPath -recurse
+    $nuspecPath = "$workingDir\gmaps-api-net.nuspec"
+    Copy-Item -Path "$buildDir\gmaps-api-net.nuspec" -Destination $nuspecPath -recurse
 
     Write-Host "Updating nuspec file at $nuspecPath" -ForegroundColor Green
     Write-Host
@@ -121,18 +121,18 @@ task Package -depends Build {
         
         foreach ($frameworkDir in $frameworkDirs)
         {
-          robocopy "$workingSourceDir\Newtonsoft.Json\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir *.dll *.pdb *.xml /NFL /NDL /NJS /NC /NS /NP /XO /XF *.CodeAnalysisLog.xml | Out-Default
+          robocopy "$workingSourceDir\Google.Maps\bin\Release\$finalDir" $workingDir\NuGet\lib\$frameworkDir *.dll *.pdb *.xml /NFL /NDL /NJS /NC /NS /NP /XO /XF *.CodeAnalysisLog.xml | Out-Default
         }
       }
     }
   
-    robocopy $workingSourceDir $workingDir\NuGet\src *.cs /S /NFL /NDL /NJS /NC /NS /NP /XD Newtonsoft.Json.Tests Newtonsoft.Json.TestConsole obj .vs artifacts | Out-Default
+    robocopy $workingSourceDir $workingDir\NuGet\src *.cs /S /NFL /NDL /NJS /NC /NS /NP /XD Google.Maps.Tests Google.Maps.TestConsole obj .vs artifacts | Out-Default
 
     Write-Host "Building NuGet package with ID $packageId and version $nugetVersion" -ForegroundColor Green
     Write-Host
 
     exec { .\Tools\NuGet\NuGet.exe pack $nuspecPath -Symbols }
-    exec { dotnet pack $workingSourceDir\Newtonsoft.Json\project.json -c Release }
+    exec { dotnet pack $workingSourceDir\Google.Maps\project.json -c Release }
     move -Path .\*.nupkg -Destination $workingDir\NuGet
   }
 
@@ -140,7 +140,7 @@ task Package -depends Build {
   
   if ($buildDocumentation)
   {
-    $mainBuild = $builds | where { $_.Name -eq "Newtonsoft.Json" } | select -first 1
+    $mainBuild = $builds | where { $_.Name -eq "GoogleMapsForNET" } | select -first 1
     $mainBuildFinalDir = $mainBuild.FinalDir
     $documentationSourcePath = "$workingDir\Package\Bin\$mainBuildFinalDir"
     $docOutputPath = "$workingDir\Documentation\"
@@ -172,7 +172,7 @@ task Deploy -depends Package {
 # Run tests on deployed files
 task Test -depends Deploy {
 
-  Update-Project $workingSourceDir\Newtonsoft.Json\project.json $false
+  Update-Project $workingSourceDir\Google.Maps\project.json $false
 
   foreach ($build in $builds)
   {
@@ -205,7 +205,7 @@ function NetCliBuild($build)
 {
   $name = $build.Name
   $framework = $build.NuGetDir
-  $projectPath = "$workingSourceDir\Newtonsoft.Json\project.json"
+  $projectPath = "$workingSourceDir\Google.Maps\project.json"
 
   exec { .\Tools\Dotnet\dotnet-install.ps1 -Version $netCliVersion | Out-Default }
   exec { dotnet --version | Out-Default }
@@ -227,15 +227,15 @@ function NetCliTests($build)
 
   Write-Host -ForegroundColor Green "Restoring packages for $name"
   Write-Host
-  exec { dotnet restore "$workingSourceDir\Newtonsoft.Json.Tests\project.json" | Out-Default }
+  exec { dotnet restore "$workingSourceDir\Google.Maps.Tests\project.json" | Out-Default }
 
   Write-Host -ForegroundColor Green "Ensuring test project builds for $name"
   Write-Host
 
   try
   {
-    Set-Location "$workingSourceDir\Newtonsoft.Json.Tests"
-    exec { dotnet test "$workingSourceDir\Newtonsoft.Json.Tests\project.json" -f netcoreapp1.0 -c Release -parallel none | Out-Default }
+    Set-Location "$workingSourceDir\Google.Maps.Tests"
+    exec { dotnet test "$workingSourceDir\Google.Maps.Tests\project.json" -f netcoreapp1.0 -c Release -parallel none | Out-Default }
   }
   finally
   {
@@ -251,13 +251,13 @@ function NUnitTests($build)
 
   Write-Host -ForegroundColor Green "Copying test assembly $name to deployed directory"
   Write-Host
-  robocopy "$workingSourceDir\Newtonsoft.Json.Tests\bin\Release\$finalDir" $workingDir\Deployed\Bin\$finalDir /MIR /NFL /NDL /NJS /NC /NS /NP /XO | Out-Default
+  robocopy "$workingSourceDir\Google.Maps.Tests\bin\Release\$finalDir" $workingDir\Deployed\Bin\$finalDir /MIR /NFL /NDL /NJS /NC /NS /NP /XO | Out-Default
 
-  Copy-Item -Path "$workingSourceDir\Newtonsoft.Json.Tests\bin\Release\$finalDir\Newtonsoft.Json.Tests.dll" -Destination $workingDir\Deployed\Bin\$finalDir\
+  Copy-Item -Path "$workingSourceDir\Google.Maps.Tests\bin\Release\$finalDir\Google.Maps.Tests.dll" -Destination $workingDir\Deployed\Bin\$finalDir\
 
   Write-Host -ForegroundColor Green "Running NUnit tests " $name
   Write-Host
-  exec { .\Tools\NUnit\nunit-console.exe "$workingDir\Deployed\Bin\$finalDir\Newtonsoft.Json.Tests.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
+  exec { .\Tools\NUnit\nunit-console.exe "$workingDir\Deployed\Bin\$finalDir\Google.Maps.Tests.dll" /framework=$framework /xml:$workingDir\$name.xml | Out-Default } "Error running $name tests"
 }
 
 function GetNuGetVersion()
