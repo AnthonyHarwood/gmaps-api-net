@@ -115,7 +115,7 @@ namespace Google.Maps.Direction
 			EnsureSensor();
 
 			var qsb = new Google.Maps.Internal.QueryStringBuilder()
-				.Append("origin", (Origin == null ? (string)null : Origin.GetAsUrlParameter()))
+				.Append("origin", Origin)
 				.Append("destination", (Destination == null ? (string)null : Destination.GetAsUrlParameter()))
 				.Append("mode", (Mode != TravelMode.driving ? Mode.ToString() : (string)null))
 				.Append("departure_time", (DepartureTime == null ? null : DepartureTime.Value.ToString()))

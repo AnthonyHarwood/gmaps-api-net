@@ -53,6 +53,17 @@ namespace Google.Maps.Internal
 		//    }
 		//    return this;
 		//}
+		public QueryStringBuilder Append(string key, IUrlParameterProvider parameterProvider)
+		{
+			if(parameterProvider != null)
+			{
+				if(_sb.Length > 0) _sb.Append("&");
+				_sb.Append(key)
+					.Append("=")
+					.Append(parameterProvider.GetAsUrlParameter());
+			}
+			return this;
+		}
 
 		/// <summary>
 		/// Appends a value when the string isn't null.
