@@ -69,7 +69,7 @@ var GMaps = new Google.Maps.Services("YOUR_API_KEY");
 
 var map = new StaticMapRequest();
 map.Center = new Location("1600 Pennsylvania Ave NW, Washington, DC 20500");
-map.Size = new System.Drawing.Size(400, 400);
+map.Size = new GSize(400, 400);
 map.Zoom = 14;
 ```
 
@@ -97,7 +97,7 @@ For WPF/xaml applications:
 ```c#
 //for WPF:
 BitmapImage img = new BitmapImage();
-img.SourceStream = staticMapsService.GetStream(staticMapsRequest);
+img.SourceStream = GMaps.StaticMapsService.GetStream(staticMapsRequest);
 
 this.imageControl.Image = img;
 ```
