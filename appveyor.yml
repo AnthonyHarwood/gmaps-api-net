@@ -26,10 +26,10 @@ init:
 
     #check that tag has appveyor.yml version numbers set correctly.  Use tag instead
     if($Env:APPVEYOR_REPO_TAG -eq "true") {
-      $tagVersion = $Env:APPVEYOR_REPO_TAG.Substring(1)
+      $tagVersion = $Env:APPVEYOR_REPO_TAG_NAME.Substring(1)
       
       if($Env:APPVEYOR_BUILD_VERSION -ne $tagVersion) {
-        Write-Host "The tag '$Env:APPVEYOR_REPO_TAGNAME' doesnt match the build version from appveyor.yml which is '$Env:APPVEYOR_BUILD_VERSION'"
+        Write-Host "The tag '$Env:APPVEYOR_REPO_TAG_NAME' doesnt match the build version from appveyor.yml which is '$Env:APPVEYOR_BUILD_VERSION'"
         Exit 1
       }
     }
