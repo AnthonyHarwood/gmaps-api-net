@@ -21,7 +21,18 @@ environment:
     secure: pnYRPfFKB+uub3hlM9mX2q3CzVKsqCg/EM/lFZ2DN6yePU4wBbhr0PhBf3dDVgU4
 
 init:
-#- ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+- ps: |
+    #write-host "init.RDP"; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
+    #check that tag has appveyor.yml version numbers set correctly.  Use tag instead
+    if($Env:APPVEYOR_REPO_TAG -eq "true") {
+      $tagVersion = $Env:APPVEYOR_REPO_TAG.Substring(1)
+      
+      if($Env:APPVEYOR_BUILD_VERSION -ne $tagVersion) {
+        Write-Host "The tag '$Env:APPVEYOR_REPO_TAGNAME' doesnt match the build version from appveyor.yml which is '$Env:APPVEYOR_BUILD_VERSION'"
+        Exit 1
+      }
+    }
 
 before_build:
   - msbuild src\GoogleMapsForNET.sln /t:restore
